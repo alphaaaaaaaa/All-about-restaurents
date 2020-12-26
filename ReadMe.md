@@ -26,4 +26,4 @@ Activate the environment
 
 Now install the necessary dependencies:
 
-```pip install django django-widget-tweaks Markdown pipenv psycopg2 whitenoise gunicorn pillow``
+```pip install django django-widget-tweaks Markdown pipenv psycopg2 whitenoise gunicorn pillow```
