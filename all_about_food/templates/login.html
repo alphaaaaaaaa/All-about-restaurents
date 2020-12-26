@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block 'content' %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!-- Checkout Section Begin -->
+
+<section class="checkout spad">
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">You are not logged In</a> </h6>
+            </div>
+        </div>
+        <form action="login" method="POST" class="checkout__form">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h5>LOGIN FORM</h5>
+
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {% if error != None %}
+                        <p style="color: red">{{ error }}</p>
+
+                        </p>
+                        {% endif %}
+                        {% for field in login_form %}
+                        <p>
+                        <div class="checkout__form__input">
+                            <p>{{ field.label_tag }}<span>*</span></p>
+                            {{ field }}
+                        </div>
+
+                        {% endfor %}
+                        <a href="#" style="color: coral;">forgot password?</a>
+                    </div>
+                    <button type="submit" name="login" class="site-btn" style="width:100%;">LOG IN</button>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="checkout__order">
+                        <h5>New to our Website?</h5>
+                        <label for="paypal">
+                            There are advances being made in science and technology everyday, and a good example of this
+                            is the
+
+                        </label>
+
+                        <a href="signup" type="submit" class="site-btn">Create Account</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </form>
+    </div>
+</section>
+{% endblock %}

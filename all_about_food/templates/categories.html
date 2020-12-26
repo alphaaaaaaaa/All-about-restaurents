@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block javascript %}
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function () {
+            $('.loading').show();
+        },
+        onAfterPageLoad: function ($items) {
+            $('.loading').hide();
+        }
+    });
+</script>
+{% endblock %}
+{% block 'content' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+        <!-- Masthead-->
+        <header class="masthead" style="background-image: url('/static/img/categories/{{ image }}');">
+            <div class="container">
+                <div class="masthead-subheading">{{ category }}</div>
+                <div class="masthead-heading text-uppercase">It's ALL ABOUT FOOD</div>
+            </div>
+        </header>
+
+        <!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>Restaurents</h4>
+                </div>
+            </div>
+        </div>
+        <div class="infinite-container">
+            <div class="row property__gallery  infinite-item">
+                {% for restaurent in restaurents %}
+                <div class="col-lg-4 col-md-6 col-sm-12 mix women">
+                    <div class=" product__item">
+                        <img src="{{ restaurent.image.url }}" class="card-img-top" alt="...">
+                        <div class="product__item__text">
+                            <h6><a href="restaurent/{{ restaurent.id }}">{{ restaurent.name }}</a></h6>
+                            <div class="rating">
+                                {% for i in restaurent.rating %}
+                                <i class="fa fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            
+                            <p class="card-text">
+                                {{ restaurent.description }}
+                            </p>
+                            location:<h5><b>{{ restaurent.address }}</b></h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {{ restaurant.next_page_number }}
+        {% if restaurents.has_next %}
+        <a class="infinite-more-link" href="?page={{ restaurents.next_page_number }}">More</a>
+        {% endif %}
+
+        <div class="loading" style="display: none;">
+            Loading...
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+{% endblock %}

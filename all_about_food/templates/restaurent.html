@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block 'content' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <!-- Masthead-->
+    <style>
+
+
+    </style>
+    <header class="masthead" style="background-image: url('{{ restaurent.image.url }}');">
+        <div class="container">
+            <div class="masthead-subheading">Welcome To Our Studio!</div>
+            <div class="masthead-heading text-uppercase">It's All about Food</div>
+        </div>
+    </header>
+    <br>
+    <br>
+    <div class="row" style="margin: 0px 20px 30px 20px;">
+        <div class="col-lg-6 col-sm-12">
+            <img style="border-radius: 5%; max-height: 800px;" src="{% static 'img/dishes/food-photographer-david-fedulov-W1Yi4z375L0-unsplash.jpg' %}">
+        </div>
+        <div class="col-lg-6 col-sm-12" style="text-align: center;">
+            <br>
+            <span style="background-color: black; border-radius: 15%; color: white; padding: 7px;" ><b>About Them</b></span>
+            
+            <h1 style="margin-top: 40px;">Delivering best ingredients for our trusty food lovers</h1>
+            <p style="font-size: 19px;" >Paris haute cuisine is a nerve-wracking gamble. What if you spend all that money and the meal doesn’t make your brain explode? There are ways to play it safe. Every day at lunch, Restaurant Guy Savoy reserves one table for guests who want to make a splash without completely destroying the bank. For 130 euros a head, you choose a starter, main course, and dessert from the a la carte menu, then the sommelier will propose several wines by the glass for 10 euros apiece. The reservation has to be made online, and is only available at noon. Order the artichoke and black truffle soup as your first course and it will immediately become one of the best things you’ve ever eaten. What happens next is up to you.</p>
+            <h6>Risus commodo viverra maecenas accumsan lacus lalala vel facilisis.</h6>
+            <h3>location:</h3>
+            <h4>{{ restaurent.address }}</h4>
+            <h3>contact no:</h3>
+            <h4>(+33) 1 4380 40 61</h4>
+        </div>
+
+    </div>
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="section-title">
+                        <h4>Dishes</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row property__gallery">
+                {% for dish in restaurent.Dishes.all %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix women bg-muted">
+                    <div class="card  rounded-10 bg-light" style="width: 16rem;border: none; border-radius: 10%; ">
+                        <img style="border-top-left-radius:15%; border-top-right-radius:15%" src="{{ dish.image.url }}"  class="card-img-top" alt="...">
+                        <div class="card-body categories__text">
+                            <h5><b>{{ dish.name }}</b></h5>   
+                            <br>
+                            <p >{{ dish.description }}</p>
+                            <div class="sh-element-margin">
+                                    <h5 class="btn btn-danger rounded-pill" style="font-size: 20px;"><b>${{dish.price}}</b></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+    <!-- Product Section End -->
+    <section class="discount">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 p-0">
+                    <div class="discount__pic">
+                        <img style="height: 400px;" src="{% static 'img/aa.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <div class="discount__pic">
+                        <img style="height: 400px;" src="{% static 'img/timing2.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}

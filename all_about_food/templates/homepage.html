@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block javascript %}
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function () {
+            $('.loading').show();
+        },
+        onAfterPageLoad: function ($items) {
+            $('.loading').hide();
+        }
+    });
+</script>
+{% endblock %}
+{% block 'content' %}
+{% load static %}
+
+<!-- Categories Section Begin -->
+<section class="categories">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <div class="categories__item categories__large__item set-bg"
+                    data-setbg="{% static 'img/categories/fine-dinning.jpg' %}">
+                    <div class="categories__text">
+                        <h1>Fine Dinning</h1>
+                        <h4><b>358 restaurants</b></h4>
+                        <a href="fine-dinning" class="text-white"><b>view</b></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/fast-food.jpg' %}">
+                            <div class="categories__text">
+                                <h3 class="text-warning"><b>Fast Food</b></h3>
+                                <h5 class="text-danger"><b>358 restaurants</b></h5>
+                                <a href="fast-food" class="text-success"><b>view</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/casual.jpg' %}">
+                            <div class="categories__text">
+                                <h3 class="text-white"><b>casual</b></h3>
+                                <h5 class="text-light"><b>358 restaurants</b></h5>
+                                <a href="casual" class="text-muted"><b>view</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cafe.jpg' %}">
+                            <div class="categories__text">
+                                <h3 class="text-danger"><b>CAFE's</b></h3>
+                                <h5 class="text-light"><b>358 cafes</b></h5>
+                                <a href="cafe" class="text-white"><b>view</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/sports-bar.jpg' %}">
+                            <div class="categories__text">
+                                <h3 class="text-primary"><b>Sports bar</b></h3>
+                                <h5 class="text-white"><b>358 restaurants</b></h5>
+                                <a href="sports-bar" class=""><b>view</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>Restaurents</h4>
+                </div>
+            </div>
+        </div>
+        <div class="infinite-container">
+            <div class="row property__gallery  infinite-item">
+                {% for restaurent in restaurents %}
+                <div class="col-lg-4 col-md-6 col-sm-12 mix women">
+                    <div class=" product__item">
+                        <img src="{{ restaurent.image.url }}" class="card-img-top" alt="...">
+                        <div class="product__item__text">
+                            <h6><a href="restaurent/{{ restaurent.id }}">{{ restaurent.name }}</a></h6>
+                            <div class="rating">
+                                {% for i in restaurent.rating %}
+                                <i class="fa fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            
+                            <p class="card-text">
+                                {{ restaurent.description }}
+                            </p>
+                            location:<h5><b>{{ restaurent.address }}</b></h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {{ restaurant.next_page_number }}
+        {% if restaurents.has_next %}
+        <a class="infinite-more-link" href="?page={{ restaurents.next_page_number }}">More</a>
+        {% endif %}
+
+        <div class="loading" style="display: none;">
+            Loading...
+        </div>
+        {% if search == True %}
+        <h2>dishes</h2>
+        <div class="infinite-container">
+            <div class="row property__gallery  infinite-item">
+                {% for dish in dishes %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix women bg-muted">
+                    <div class="card bg-light rounded-10" style="width: 20rem; border-radius: 10%; ">
+                        <img src="{{ dish.image.url }}"  class="card-img-top" alt="...">
+                        <div class="card-body categories__text">
+                            <h5><b>{{ dish.name }}</b></h5>
+                            <br>
+                            <p>{{ dish.description }}</p>
+                            <div class="sh-element-margin">
+                                    <h5 class="btn btn-danger rounded-pill" style="font-size: 20px;"><b>${{dish.price}}</b></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {{ restaurant.next_page_number }}
+        {% if restaurents.has_next %}
+        <a class="infinite-more-link" href="?page={{ restaurents.next_page_number }}">More</a>
+        {% endif %}
+
+        <div class="loading" style="display: none;">
+            Loading...
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Product Section End -->
+{% endblock %}
