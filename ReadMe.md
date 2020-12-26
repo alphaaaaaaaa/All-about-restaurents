@@ -10,11 +10,11 @@ To run this app on your system. Do the following:
 
 ### How to Run the app
 
-```git clone https://github.com/all_about_restaurent/verify.git```
+```git clone https://github.com/alphaaaaaaaa/All-about-restaurents.git```
 
 Change directory into the app:
 
-```cd verify```
+```cd all_about_food```
 
 Create a new virtual environment
 
